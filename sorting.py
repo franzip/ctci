@@ -15,11 +15,11 @@ def bubble_sort(nums):
 
 
 def selection_sort(nums):
-    numsLen = len(nums)
+    nums_len = len(nums)
 
-    for i in range(numsLen):
+    for i in range(nums_len):
         minIdx = i
-        for j in range(i + 1, numsLen):
+        for j in range(i + 1, nums_len):
             if nums[j] < nums[minIdx]:
                 minIdx = j
 
@@ -29,9 +29,7 @@ def selection_sort(nums):
 
 
 def insertion_sort(nums):
-    numsLen = len(nums)
-
-    for i in range(1, numsLen):
+    for i in range(1, len(nums)):
         curr, j = nums[i], i - 1
 
         while nums[j] > curr and j >= 0:
@@ -43,30 +41,29 @@ def insertion_sort(nums):
     return nums
 
 
-def merge(sNums1, sNums2):
-    result = []
-
-    while len(sNums1) > 0 and len(sNums2) > 0:
-        if sNums1[0] <= sNums2[0]:
-            result.append(sNums1[0])
-            sNums1 = sNums1[1:]
-        else:
-            result.append(sNums2[0])
-            sNums2 = sNums2[1:]
-
-    return result + sNums1 + sNums2
-
-
 def merge_sort(nums):
+    def merge(first_list, second_list):
+        result = []
+
+        while len(first_list) > 0 and len(second_list) > 0:
+            if first_list[0] <= second_list[0]:
+                result.append(first_list[0])
+                first_list = first_list[1:]
+            else:
+                result.append(second_list[0])
+                second_list = second_list[1:]
+
+        return result + first_list + second_list
+
     length = len(nums)
 
     if length < 2:
         return nums
 
-    sNums1 = merge_sort(nums[0: length // 2])
-    sNums2 = merge_sort(nums[length // 2:])
+    left_half = merge_sort(nums[0: length // 2])
+    right_half = merge_sort(nums[length // 2:])
 
-    return merge(sNums1, sNums2)
+    return merge(left_half, right_half)
 
 
 def quick_sort(nums):
@@ -75,20 +72,20 @@ def quick_sort(nums):
     if length < 2:
         return nums
 
-    pivotIdx = length // 2
+    pivot_idx = length // 2
     left, right = [], []
 
     for i in range(len(nums)):
-        if i == pivotIdx:
+        if i == pivot_idx:
             continue
 
         num = nums[i]
-        if num < nums[pivotIdx]:
+        if num < nums[pivot_idx]:
             left.append(num)
         else:
             right.append(num)
 
-    return quick_sort(left) + [nums[pivotIdx]] + quick_sort(right)
+    return quick_sort(left) + [nums[pivot_idx]] + quick_sort(right)
 
 
 def radix_sort(nums):
