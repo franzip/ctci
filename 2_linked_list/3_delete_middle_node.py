@@ -8,9 +8,9 @@ def delete_node_from_list(node: Node):
     if not node or not node.next:
         return
 
-    nextNode = node.next
-    node.data = nextNode.data
-    node.next = nextNode.next
+    next_node = node.next
+    node.data = next_node.data
+    node.next = next_node.next
 
 
 nodeA = Node(10)

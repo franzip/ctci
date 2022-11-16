@@ -1,12 +1,12 @@
 from lib import LinkedList
 
 
-def sumDigitsWithRemainder(first, second, remainder):
+def sum_digits_with_remainder(first, second, remainder):
     result = first + second + remainder
-    hasRemainder = result >= 10
+    has_remainder = result >= 10
     return {
-        'digit': result % 10 if hasRemainder else result,
-        'remainder': result // 10 if hasRemainder else 0
+        'digit': result % 10 if has_remainder else result,
+        'remainder': result // 10 if has_remainder else 0
     }
 
 
@@ -19,10 +19,10 @@ def sum_lists_reversed(list1: LinkedList, list2: LinkedList):
     result, remainder = [], 0
 
     while ptr1 or ptr2:
-        sumResult = sumDigitsWithRemainder(
+        sum_result = sum_digits_with_remainder(
             (ptr1 and ptr1.data) or result[-1], (ptr2 and ptr2.data) or result[-1], remainder)
-        result.append(sumResult.get('digit'))
-        remainder = sumResult.get('remainder')
+        result.append(sum_result.get('digit'))
+        remainder = sum_result.get('remainder')
 
         if ptr1:
             ptr1 = ptr1.next
@@ -56,11 +56,11 @@ def sum_list(list1: LinkedList, list2: LinkedList):
             digits[1] = [0] + digits[1]
 
     for i in range(len(digits[0]) - 1, -1, -1):
-        sumResult = sumDigitsWithRemainder(
+        sum_result = sum_digits_with_remainder(
             digits[0][i], digits[1][i], remainder)
 
-        result = [sumResult.get('digit')] + result
-        remainder = sumResult.get('remainder')
+        result = [sum_result.get('digit')] + result
+        remainder = sum_result.get('remainder')
 
     if remainder:
         result = [remainder] + result

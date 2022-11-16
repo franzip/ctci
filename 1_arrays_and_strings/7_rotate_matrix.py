@@ -8,16 +8,16 @@ def rotate_matrix(matrix: List[List[str]]) -> List[List[str]]:
     length = len(matrix)
     even = length % 2 == 0
     iterations = length if even else length - 1
-    lastCol = iterations - 1 if even else iterations
+    last_col = iterations - 1 if even else iterations
 
     for i in range(iterations):
-        if even and i == lastCol:
+        if even and i == last_col:
             idx = length // 2 - 1
             matrix[idx][idx + 1], matrix[idx + 1][idx + 1], matrix[idx][idx], matrix[idx +
                                                                                      1][idx] = matrix[idx][idx], matrix[idx][idx + 1], matrix[idx + 1][idx], matrix[idx + 1][idx + 1]
         else:
-            matrix[0][i], matrix[i][lastCol], matrix[lastCol][lastCol -
-                                                              i], matrix[lastCol - i][0] = matrix[lastCol - i][0], matrix[0][i], matrix[i][lastCol], matrix[lastCol][lastCol - i]
+            matrix[0][i], matrix[i][last_col], matrix[last_col][last_col -
+                                                                i], matrix[last_col - i][0] = matrix[last_col - i][0], matrix[0][i], matrix[i][last_col], matrix[last_col][last_col - i]
 
     return matrix
 

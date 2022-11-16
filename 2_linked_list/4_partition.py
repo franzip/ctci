@@ -5,7 +5,7 @@ def partition_list(list: LinkedList, val: int):
     """
     Partition a singly linked list based on a given value
     """
-    headLeft, headRight, tailLeft, tailRight = None, None, None, None
+    head_left, head_right, tail_left, tail_right = None, None, None, None
     ptr = list.head
 
     while ptr:
@@ -13,22 +13,22 @@ def partition_list(list: LinkedList, val: int):
         ptr.next = None
 
         if ptr.data < val:
-            if not headLeft:
-                headLeft, tailLeft = ptr, ptr
+            if not head_left:
+                head_left, tail_left = ptr, ptr
             else:
-                tailLeft.next = ptr
-                tailLeft = ptr
+                tail_left.next = ptr
+                tail_left = ptr
         else:
-            if not headRight:
-                headRight, tailRight = ptr, ptr
+            if not head_right:
+                head_right, tail_right = ptr, ptr
             else:
-                tailRight.next = ptr
-                tailRight = ptr
+                tail_right.next = ptr
+                tail_right = ptr
 
         ptr = next
 
-    list.head = headLeft
-    tailLeft.next = headRight
+    list.head = head_left
+    tail_left.next = head_right
 
 
 a = LinkedList([5, 3, 8, 5, 10, 2, 1])

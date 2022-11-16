@@ -6,19 +6,25 @@ def zero_matrix(matrix: List[List[str]]) -> List[List[str]]:
     When a 0 is found in matrix, writes all 0 in the related row and column
     """
     rows, cols = len(matrix), len(matrix[0])
-    colToRowZeroMap = {}
+    col_to_row_zero = set()
 
     for row in range(rows):
-        zeroRow = False
+        zero_row = False
+
         for col in range(cols):
-            if colToRowZeroMap.get(col):
+            if col in col_to_row_zero:
                 continue
+
             if matrix[row][col] == 0:
-                zeroRow = True
-                for rowToZero in range(rows):
-                    matrix[rowToZero][col] = 0
-                colToRowZeroMap[col] = True
-        if zeroRow:
+                zero_row = True
+                col_to_row_zero.add(col)
+
+                for row_to_zero in range(rows):
+                    # zero the column
+                    matrix[row_to_zero][col] = 0
+
+        # zero the row
+        if zero_row:
             matrix[row] = [0 for x in range(cols)]
 
     return matrix

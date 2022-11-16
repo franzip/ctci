@@ -1,31 +1,31 @@
-def one_away(strA: str, strB: str):
+def one_away(str_a: str, str_b: str):
     """
     Checks if the two strings are one operation away.
     Possible operations: add, remove or edit a character
     """
 
-    lenA, lenB = len(strA), len(strB)
+    len_a, len_b = len(str_a), len(str_b)
 
-    if abs(lenA - lenB) > 1:
+    if abs(len_a - len_b) > 1:
         return False
 
-    changed, sameLength = False, lenA == lenB
+    changed, same_length = False, len_a == len_b
 
-    maxStr = strA if sameLength else max(strA, strB, key=len)
-    minStr = strB if sameLength else min(strB, strB, key=len)
+    longer_str = str_a if same_length else max(str_a, str_b, key=len)
+    smaller_str = str_b if same_length else min(str_b, str_b, key=len)
 
-    for i in range(len(minStr)):
-        j = i + 1 if not sameLength and changed else i
+    for i in range(len(smaller_str)):
+        j = i + 1 if not same_length and changed else i
 
-        hasDiff = minStr[i] != maxStr[j]
+        has_diff = smaller_str[i] != longer_str[j]
 
-        if hasDiff:
+        if has_diff:
             if changed:
                 return False
 
             changed = True
 
-    return changed if sameLength else changed or i == j
+    return changed if same_length else changed or i == j
 
 
 assert (one_away('pale', 'ple') == True)

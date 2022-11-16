@@ -2,11 +2,11 @@ def string_compression(str: str):
     """
     Compress basic string compression
     """
-    strLen, result = len(str), ""
+    str_len, result = len(str), ""
     count, i = 0, 0
 
-    while i < strLen - 1:
-        if i != strLen - 1 and str[i + 1] != str[i]:
+    while i < str_len - 1:
+        if i != str_len - 1 and str[i + 1] != str[i]:
             result = f"{result}{str[i]}{count+1}"
             count = 0
         else:
@@ -16,7 +16,7 @@ def string_compression(str: str):
 
     result = f"{result}{str[i]}{count + 1}"
 
-    return str if strLen <= len(result) else result
+    return str if str_len <= len(result) else result
 
 
 assert string_compression("aabcccccaaa") == "a2b1c5a3"

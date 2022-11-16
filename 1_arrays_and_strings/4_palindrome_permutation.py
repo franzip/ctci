@@ -2,22 +2,22 @@ def palindrome_permutation(str: str) -> bool:
     """
     Checks if str is a permutation of a palindrome string
     """
-    charMap, strLen = {}, 0
+    char_map, str_len = {}, 0
 
     for char in str:
         if char.isalpha():
-            strLen += 1
+            str_len += 1
             char_to_lower = char.lower()
-            charMap[char_to_lower] = charMap.get(char_to_lower, 0) + 1
+            char_map[char_to_lower] = char_map.get(char_to_lower, 0) + 1
 
-    oddFound = False
+    odd_found = False
 
-    for x in charMap.values():
+    for x in char_map.values():
         if x % 2 == 1:
-            if oddFound:
+            if odd_found:
                 return False
 
-            oddFound = True
+            odd_found = True
 
     return True
 

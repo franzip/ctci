@@ -1,4 +1,7 @@
-def bubble_sort(nums):
+from typing import List
+
+
+def bubble_sort(nums: List[int]):
     swapped = True, 0
 
     while swapped:
@@ -14,7 +17,7 @@ def bubble_sort(nums):
     return nums
 
 
-def selection_sort(nums):
+def selection_sort(nums: List[int]):
     nums_len = len(nums)
 
     for i in range(nums_len):
@@ -28,7 +31,7 @@ def selection_sort(nums):
     return nums
 
 
-def insertion_sort(nums):
+def insertion_sort(nums: List[int]):
     for i in range(1, len(nums)):
         curr, j = nums[i], i - 1
 
@@ -41,8 +44,8 @@ def insertion_sort(nums):
     return nums
 
 
-def merge_sort(nums):
-    def merge(first_list, second_list):
+def merge_sort(nums: List[int]):
+    def merge(first_list: List[int], second_list: List[int]):
         result = []
 
         while len(first_list) > 0 and len(second_list) > 0:
@@ -66,7 +69,7 @@ def merge_sort(nums):
     return merge(left_half, right_half)
 
 
-def quick_sort(nums):
+def quick_sort(nums: List[int]):
     length = len(nums)
 
     if length < 2:
@@ -88,7 +91,7 @@ def quick_sort(nums):
     return quick_sort(left) + [nums[pivot_idx]] + quick_sort(right)
 
 
-def radix_sort(nums):
+def radix_sort(nums: List[int]):
     def enqueue(nums, iter):
         result = [[] for _ in range(10)]
 
@@ -98,7 +101,7 @@ def radix_sort(nums):
 
         return result
 
-    def dequeue(buckets):
+    def dequeue(buckets: List[List[int]]):
         result = []
         for bucket in buckets:
             result += bucket
@@ -106,13 +109,43 @@ def radix_sort(nums):
 
     iters = len(str(max(nums)))
 
-    def _radix_sort(nums, iter):
+    def _radix_sort(nums: List[int], iter: int):
         if iter == iters:
             return nums
 
         return _radix_sort(dequeue(enqueue(nums, iter + 1)), iter + 1)
 
     return _radix_sort(nums, 0)
+
+
+def heap_sort(nums: List[int]):
+    size = len(nums)
+
+    def __swap(i, j):
+        nums[i], nums[j] = nums[j], nums[i]
+
+    def __heapifyAt(i: int, offset):
+        left_idx, right_idx = (i * 2) + 1, (i * 2) + 2
+        largest_idx = i
+
+        if left_idx < offset and nums[left_idx] > nums[largest_idx]:
+            largest_idx = left_idx
+
+        if right_idx < offset and nums[right_idx] > nums[largest_idx]:
+            largest_idx = right_idx
+
+        if largest_idx != i:
+            __swap(largest_idx, i)
+            __heapifyAt(largest_idx, offset)
+
+    for i in range(size // 2 - 1, -1, -1):
+        __heapifyAt(i, size)
+
+    for i in range(size - 1, 0, -1):
+        __swap(0, i)
+        __heapifyAt(0, i)
+
+    return nums
 
 
 assert bubble_sort([1, 5, 4, 2, 3]) == [1, 2, 3, 4, 5]
@@ -122,3 +155,4 @@ assert merge_sort([5, 1, 4, 2, 3]) == [1, 2, 3, 4, 5]
 assert quick_sort([5, 1, 4, 2, 3]) == [1, 2, 3, 4, 5]
 assert radix_sort([255, 13, 2, 5250, 120, 25, 1123]) == [
     2, 13, 25, 120, 255, 1123, 5250]
+assert heap_sort([10, 20, 15, 30, 40]) == [10, 15, 20, 30, 40]
