@@ -34,7 +34,7 @@ class StackOfPlates():
         if self.is_empty():
             raise StackEmptyException()
 
-        return self.stacks[0].peek()
+        return self.stacks[-1].peek()
 
     def is_empty(self):
         return not len(self.stacks)

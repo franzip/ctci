@@ -20,7 +20,7 @@ def sum_lists_reversed(list1: LinkedList, list2: LinkedList):
 
     while ptr1 or ptr2:
         sum_result = sum_digits_with_remainder(
-            (ptr1 and ptr1.data) or result[-1], (ptr2 and ptr2.data) or result[-1], remainder)
+            (ptr1 and ptr1.data) or 0, (ptr2 and ptr2.data) or 0, remainder)
         result.append(sum_result.get('digit'))
         remainder = sum_result.get('remainder')
 

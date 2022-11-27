@@ -13,8 +13,10 @@ class StackMin(Stack):
         super().push(data)
 
     def pop(self):
-        if super().pop() == self.mins.peek():
+        item = super().pop()
+        if item == self.mins.peek():
             self.mins.pop()
+        return item
 
     def min(self):
         try:
